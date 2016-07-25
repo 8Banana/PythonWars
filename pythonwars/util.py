@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import inflect
+import inflection
 
 
 class _AttributesFromJson(object):
@@ -13,4 +13,4 @@ class _AttributesFromJson(object):
             look_in = json_data
             for inner_key in tree:
                 look_in = look_in[inner_key]
-            setattr(self, inflect.underscore(leaf), look_in[leaf])
+            setattr(self, inflection.underscore(leaf), look_in[leaf])

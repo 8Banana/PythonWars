@@ -1,2 +1,2 @@
-inflect>=0.2.5
 requests>=2.10.0
+inflection>=0.3.1
