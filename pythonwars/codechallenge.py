@@ -3,7 +3,7 @@ from .util import _AttributesFromJson
 
 
 class CodeChallenge(_AttributesFromJson):
-    ATTR_KEYS = [
+    attr_keys = [
         "success",
         "name",
         "slug",
