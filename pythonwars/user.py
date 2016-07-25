@@ -1,37 +1,30 @@
 #!/usr/bin/env python3
+from .util import _AttributesFromJson
 
 
-class Rank(object):
-    ATTR_KEYS = [
+class Rank(_AttributesFromJson):
+    attr_keys = [
         "rank",
         "name",
         "color",
         "score"
     ]
 
-    def __init__(self, json_data):
-        for key in self.ATTR_KEYS:
-            setattr(self, key, json_data[key])
 
-
-class User(object):
-    ATTR_KEYS = [
+class User(_AttributesFromJson):
+    attr_keys = [
         "username",
         "name",
         "honor",
         "clan",
         "leaderboardPosition",
         "skills",
+        "codeChallenges",
     ]
 
     def __init__(self, json_data):
-        for key in self.ATTR_KEYS:
-            setattr(self, key, json_data[key])
+        super().__init__(json_data)
         self.overall_rank = Rank(json_data["ranks"]["overall"])
         self.language_ranks = {}
         for language, rank_data in json_data["ranks"]["languages"].items():
             self.language_ranks[language] = Rank(rank_data)
-        self.code_challenges = {
-            "authored": json_data["codeChallenges"]["totalAuthored"],
-            "completed": json_data["codeChallenges"]["totalCompleted"]
-        }

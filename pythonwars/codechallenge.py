@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+from .util import _AttributesFromJson
 
 
-class CodeChallenge(object):
+class CodeChallenge(_AttributesFromJson):
     ATTR_KEYS = [
         "success",
         "name",
@@ -9,16 +10,11 @@ class CodeChallenge(object):
         "description",
         "author",
         "rank"
-        # skipping "averageCompletion",
+        "averageCompletion",
         "tags",
+        "session/projectId",
+        "session/solutionId",
+        "session/setup",
+        "session/exampleFixture",
+        "session/code",
     ]
-
-    def __init__(self, json_data):
-        for key in ATTR_KEYS:
-            setattr(self, key, json_data[key])
-        self.average_completion = json_data["averageCompletion"]
-        self.project_id = json_data["session"]["projectId"]
-        self.solution_id = json_data["session"]["solutionId"]
-        self.setup = json_data["session"]["setup"]
-        self.example_fixture = json_data["session"]["exampleFixture"]
-        self.code = json_data["session"]["code"]
