@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from .util import _AttributesFromJson
+from .util import AttributesFromJSON
 
 
-class CodeChallenge(_AttributesFromJson):
+class CodeChallenge(AttributesFromJSON):
     attr_keys = [
         "success",
         "name",
