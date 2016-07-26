@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import inflection
 
+__all__ = ["AttributesFromJson"]
 
-class AttributesFromJSON(object):
-    attr_keys = [
 
-    ]
+class AttributesFromJson(object):
+    attr_keys = []
 
     def __init__(self, json_data):
         for key in self.attr_keys:
