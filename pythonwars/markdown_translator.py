@@ -2,6 +2,7 @@
 import colorama
 import mistune
 import pygments
+import tabulate
 
 from pygments.formatters import TerminalFormatter
 from pygments.lexers import get_lexer_by_name
@@ -36,8 +37,19 @@ class _AnsiRenderer(mistune.Renderer):
     def paragraph(self, text):
         return text + "\n"
 
-    # MISSING: table(header, body), table_row(content), table_cell(content,
-    # **flags)
+    def table(self, header, body):
+        headers = header.split("|")[:-1]
+        rows = [x.split("|")[:-1] for x in body.splitlines()]
+        return tabulate.tabulate(rows, headers)
+
+    def table_row(self, content):
+        return content + "\n"
+
+    def table_cell(self, content, **flags):
+        if flags["header"]:
+            return colorama.Style.BRIGHT + content + colorama.Style.RESET_ALL + "|"
+        else:
+            return content + "|"
 
     def autolink(self, link, is_email=False):
         return "<{}>".format(link)
