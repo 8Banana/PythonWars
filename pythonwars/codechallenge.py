@@ -9,7 +9,7 @@ class CodeChallenge(AttributesFromJson):
         "slug",
         "description",
         "author",
-        "rank"
+        "rank",
         "averageCompletion",
         "tags",
         "session/projectId",

@@ -58,10 +58,10 @@ class _AnsiRenderer(mistune.Renderer):
         return colorama.Fore.GREEN + text + colorama.Style.RESET_ALL + "\n"
 
     def double_emphasis(self, text):
-        return colorama.Fore.BRIGHT + text + colorama.Style.RESET_ALL + "\n"
+        return colorama.Style.BRIGHT + text + colorama.Style.RESET_ALL + "\n"
 
     def emphasis(self, text):
-        return colorama.Fore.BRIGHT + text + colorama.Style.RESET_ALL + "\n"
+        return colorama.Style.BRIGHT + text + colorama.Style.RESET_ALL + "\n"
 
     def image(self, src, title, alt_text):
         # XXX: What should we do here?
