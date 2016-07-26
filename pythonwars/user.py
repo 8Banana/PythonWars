@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from .util import _AttributesFromJson
+from .util import AttributesFromJSON
 
 
-class Rank(_AttributesFromJson):
+class Rank(AttributesFromJSON):
     attr_keys = [
         "rank",
         "name",
@@ -11,7 +11,7 @@ class Rank(_AttributesFromJson):
     ]
 
 
-class User(_AttributesFromJson):
+class User(AttributesFromJSON):
     attr_keys = [
         "username",
         "name",

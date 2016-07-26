@@ -2,7 +2,7 @@
 import inflection
 
 
-class _AttributesFromJson(object):
+class AttributesFromJSON(object):
     attr_keys = [
 
     ]
