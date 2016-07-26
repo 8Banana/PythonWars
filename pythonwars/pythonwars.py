@@ -5,13 +5,14 @@ from .user import User
 from .codechallenge import CodeChallenge
 
 
+_GET_USER_URL = "https://codewars.com/api/v1/users/{}"
+_GET_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}"
+_TRAIN_NEXT_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}/train"
+_TRAIN_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}/{}/train"
+_ATTEMPT_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/:project_id/solutions/:solution_id/attempt"
+_FINALIZE_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/{}/solutions/{}/finalize"
+
 class CodeWars(object):
-    GET_USER_URL = "https://codewars.com/api/v1/users/{}"
-    GET_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}"
-    TRAIN_NEXT_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}/train"
-    TRAIN_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}/{}/train"
-    ATTEMPT_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/:project_id/solutions/:solution_id/attempt"
-    FINALIZE_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/{}/solutions/{}/finalize"
 
     def __init__(self, api_key=None):
         self.api_key = api_key
@@ -22,19 +23,19 @@ class CodeWars(object):
             })
 
     def get_user(self, id_or_username):
-        url = self.GET_USER_URL.format(id_or_username)
+        url = _GET_USER_URL.format(id_or_username)
         response = self.session.get(url)
         response.raise_for_status()
         return User(response.json())
 
     def get_code_challenge(self, id_or_slug):
-        url = self.GET_CODE_CHALLENGE_URL.format(id_or_slug)
+        url = _GET_CODE_CHALLENGE_URL.format(id_or_slug)
         response = self.session.get(url)
         response.raise_for_status()
         return CodeChallenge(response.json())
 
     def train_next_code_challenge(self, language, strategy="default", peek=False):
-        url = self.TRAIN_NEXT_CODE_CHALLENGE_URL.format(language)
+        url = _TRAIN_NEXT_CODE_CHALLENGE_URL.format(language)
         post_data = {
             "strategy": strategy,
             "peek": peek,
@@ -44,13 +45,13 @@ class CodeWars(object):
         return CodeChallenge(response.json())
 
     def train_code_challenge(self, id_or_slug, language):
-        url = self.TRAIN_CODE_CHALLENGE_URL.format(id_or_slug, language)
+        url = _TRAIN_CODE_CHALLENGE_URL.format(id_or_slug, language)
         response = self.session.post(url)
         response.raise_for_status()
         return CodeChallenge(response.json())
 
     def attempt_solution(self, project_id, solution_id, code, output_format="html"):
-        url = self.ATTEMPT_SOLUTION_URL.format(project_id, solution_id)
+        url = _ATTEMPT_SOLUTION_URL.format(project_id, solution_id)
         post_data = {
             "code": code,
             "output_format": output_format,
@@ -60,7 +61,7 @@ class CodeWars(object):
         return response.json()
 
     def finalize_solution(self, project_id, solution_id):
-        url = self.FINALIZE_SOLUTION_URL.format(project_id, solution_id)
+        url = _FINALIZE_SOLUTION_URL.format(project_id, solution_id)
         response = self.session.post(url)
         response.raise_for_status()
         return response.json()
