@@ -20,7 +20,7 @@ bold = '*' '*' <nonspecial+>:x '*' '*' -> bold(x)
 italic = '_' <nonspecial+>:x '_' -> italic(x)
 header = ('#' <anything+>:x | <anything+>:y '\n' '='+) -> header(x or y)
 code = '`' <nonspecial+>:x '`' -> code(x)
-multiline_code = '`'{3} <anything*>:lang '\n' <anything*>:code '\n' '`'{3} -> (code, lang)
+multiline_code = '`'{3} <anything*>:lang '\n' <anything*>:code '\n' '`'{3} -> multiline_code(code, lang)
 text = (header | bold | italic | code | multiline_code | <nonspecial+>)+
 """, GRAMMAR_FUNCTIONS)
 
