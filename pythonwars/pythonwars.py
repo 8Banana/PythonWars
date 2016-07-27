@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import inflection
 import requests
 
 
@@ -21,8 +22,11 @@ class CodeWars:
             })
 
     def _request_json(self, url, **kwargs):
-        # If you pass data, `.get` automatically becomes `.post`
-        response = self.session.get(url, **kwargs)
+        # XXX: Should we have people pass a `method` argument?
+        if "data" not in kwargs:
+            response = self.session.get(url, **kwargs)
+        else:
+            response = self.session.post(url, **kwargs)
         response.raise_for_status()
         return {inflection.underscore(k): v
                 for k, v in response.json().items()}
