@@ -2,8 +2,9 @@
 from .util import AttributesFromJson
 
 
-class CodeChallenge(AttributesFromJson):
+class TrainingCodeChallenge(AttributesFromJson):
     attr_keys = [
+        "success",
         "name",
         "slug",
         "description",
@@ -16,4 +17,24 @@ class CodeChallenge(AttributesFromJson):
         "session/setup",
         "session/exampleFixture",
         "session/code",
+    ]
+
+class CodeChallengeInfo(AttributesFromJson):
+    attr_keys = [
+        "id",
+        "name",
+        "slug",
+        "category",
+        "publishedAt",
+        "approvedAt",
+        "languages",
+        "url",
+        "rank:pythonwars.user.CodeChallengeRank",
+        "createdBy",
+        "approvedBy",
+        "description",
+        "totalAttempts",
+        "totalCompleted",
+        "totalStars",
+        "tags",
     ]
