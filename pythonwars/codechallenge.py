@@ -4,7 +4,6 @@ from .util import AttributesFromJson
 
 class CodeChallenge(AttributesFromJson):
     attr_keys = [
-        "success",
         "name",
         "slug",
         "description",
