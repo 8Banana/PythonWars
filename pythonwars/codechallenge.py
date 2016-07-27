@@ -29,7 +29,7 @@ class CodeChallengeInfo(AttributesFromJson):
         "approvedAt",
         "languages",
         "url",
-        "rank",
+        "rank:pythonwars.user.CodeChallengeRank",
         "createdBy",
         "approvedBy",
         "description",
