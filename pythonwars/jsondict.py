@@ -28,5 +28,8 @@ class JsonDict:
                                                                 key)
             raise AttributeError(errmsg) from None
 
+    def __setattr__(self, key, value):
+        self._data[inflection.camelize(key, False)] = value
+
     def __repr__(self):
         return "{}({})".format(self.__class__.__name__, self._data)
