@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import requests
 
-from .util import JsonDict
-
 
 _GET_USER_URL = "https://codewars.com/api/v1/users/{}"
 _GET_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}"
@@ -26,7 +24,8 @@ class CodeWars:
         # If you pass data, `.get` automatically becomes `.post`
         response = self.session.get(url, **kwargs)
         response.raise_for_status()
-        return JsonDict(response.json())
+        return {inflection.underscore(k): v
+                for k, v in response.json().items()}
 
     def get_user(self, id_or_username):
         return self._request_json(_GET_USER_URL.format(id_or_username))
