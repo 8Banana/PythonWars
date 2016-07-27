@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-from .util import AttributesFromJSON
+from .util import AttributesFromJson
 
 
-class CodeChallenge(AttributesFromJSON):
+class TrainingCodeChallenge(AttributesFromJson):
     attr_keys = [
         "success",
         "name",
         "slug",
         "description",
         "author",
-        "rank"
+        "rank",
         "averageCompletion",
         "tags",
         "session/projectId",
@@ -17,4 +17,24 @@ class CodeChallenge(AttributesFromJSON):
         "session/setup",
         "session/exampleFixture",
         "session/code",
+    ]
+
+class CodeChallengeInfo(AttributesFromJson):
+    attr_keys = [
+        "id",
+        "name",
+        "slug",
+        "category",
+        "publishedAt",
+        "approvedAt",
+        "languages",
+        "url",
+        "rank:pythonwars.user.CodeChallengeRank",
+        "createdBy",
+        "approvedBy",
+        "description",
+        "totalAttempts",
+        "totalCompleted",
+        "totalStars",
+        "tags",
     ]
