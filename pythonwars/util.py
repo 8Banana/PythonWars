@@ -1,28 +1,32 @@
 #!/usr/bin/env python3
-import sys
-
 import inflection
 
-__all__ = ["AttributesFromJson"]
+__all__ = ["JsonDict"]
 
 
-class AttributesFromJson:
-    attr_keys = []
-
+class JsonDict:
     def __init__(self, json_data):
-        for key in self.attr_keys:
-            tree = key.split("/")
-            leaf = tree.pop()
-            look_in = json_data
-            if ":" in leaf:
-                leaf, class_name = leaf.split(":")
-            else:
-                class_name = None
-            for inner_key in tree:
-                look_in = look_in[inner_key]
-            result = look_in[leaf]
-            if class_name is not None:
-                *module_name, class_name = class_name.split(".")
-                module_name = ".".join(module_name)
-                result = sys.modules[module_name].__dict__[class_name](result)
-            setattr(self, inflection.underscore(leaf), result)
+        self._data = json_data
+
+    def __getitem__(self, key):
+        value = self._data[inflection.camelize(key, False)]
+        # We only want to convert "real" dicts
+        if value.__class__ is dict:
+            value = self.__class__(value)
+        return value
+
+    def __setitem__(self, key, value):
+        self._data[inflection.camelize(key, False)] = value
+
+    def __getattr__(self, key):
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            # The lengths I go to for PEP8.
+            clsname = self.__class__.__name__
+            errmsg = "{!r} object has no attribute {!r}".format(clsname,
+                                                                key)
+            raise AttributeError(errmsg) from None
+
+    def __repr__(self):
+        return "{}({})".format(self.__class__.__name__, self._data)
