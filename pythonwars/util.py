@@ -4,7 +4,7 @@ import inflection
 __all__ = ["AttributesFromJson"]
 
 
-class AttributesFromJson(object):
+class AttributesFromJson:
     attr_keys = []
 
     def __init__(self, json_data):

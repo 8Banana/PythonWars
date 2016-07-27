@@ -12,7 +12,7 @@ _TRAIN_CODE_CHALLENGE_URL = "https://www.codewars.com/api/v1/code-challenges/{}/
 _ATTEMPT_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/:project_id/solutions/:solution_id/attempt"
 _FINALIZE_SOLUTION_URL = "https://www.codewars.com/api/v1/code-challenges/projects/{}/solutions/{}/finalize"
 
-class CodeWars(object):
+class CodeWars:
 
     def __init__(self, api_key=None):
         self.api_key = api_key
