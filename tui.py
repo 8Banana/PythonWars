@@ -1,6 +1,6 @@
 from os import path
 import time
-import threading
+from threading import Thread
 
 import curses
 from curses import ERR
@@ -8,30 +8,14 @@ from requests.exceptions import HTTPError
 
 from pythonwars.pythonwars import CodeWars
 
-class TermTools:
-    def __init__(self, term_size, scr):
-        self.term_size = None
-        self.scr = scr
-
-    def resize(self):
-        while True:
-            if curses.is_term_resized(*self.term_size):
-                self.scr.clear()
-                self.scr.resizeterm(*self.term_size)
-                self.scr.refresh()
-
 
 class Tui:
     def __init__(self):
         self.code_wars = None
 
     def main(self, curse_main):
-        curse_main.scrollok(1)
-        t_tools = TermTools(curse_main.getmaxyx(), curse_main)
-        size_thrd = threading.Thread(t_tools.resize())
-        size_thrd.start()
+
         curses.cbreak()
-        
         self.login_screen(curse_main)
         curse_main.clear()
         self.auth_api(curse_main)
@@ -47,7 +31,7 @@ class Tui:
         curses.echo()
         time.sleep(1)
 
-        logo_thrd = threading.Thread(self.logo_print(login_scr))
+        logo_thrd = Thread(self.logo_print(login_scr))
         logo_thrd.start()
         
         user_api = ''
