@@ -1,4 +1,3 @@
-import inflection
 import requests
 
 
@@ -14,12 +13,7 @@ _FINALIZE_SOLUTION_URL = (_API_URL + "code-challenges/projects/{}/"
 
 
 class CodeWars:
-    """The class that handles the CodeWars API.
-    Some methods can be used without passing an api_key to __init__, such as
-    `get_user`.
-    Whenever a method would return a camelCase key, this class turns it into
-    a snake_case key.
-    """
+    """The class that handles the CodeWars API."""
 
     def __init__(self, api_key=None):
         self.api_key = api_key
@@ -30,8 +24,7 @@ class CodeWars:
     def _request_json(self, method, url, **kwargs):
         response = self.session.request(method, url, **kwargs)
         response.raise_for_status()
-        return {inflection.underscore(k): v
-                for k, v in response.json().items()}
+        return response.json()
 
     def get_user(self, id_or_username):
         return self._request_json("get", _GET_USER_URL.format(id_or_username))
