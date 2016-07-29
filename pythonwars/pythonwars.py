@@ -21,17 +21,21 @@ class CodeWars:
     a snake_case key.
     """
 
-    def __init__(self, api_key=None):
+    def __init__(self, api_key=None, *, use_camel_case=False):
         self.api_key = api_key
         self.session = requests.Session()
+        self.use_camel_case = use_camel_case
         if api_key is not None:
             self.session.headers["Authorization"] = api_key
 
     def _request_json(self, method, url, **kwargs):
         response = self.session.request(method, url, **kwargs)
         response.raise_for_status()
-        return {inflection.underscore(k): v
-                for k, v in response.json().items()}
+        if self.use_camel_case:
+            return response.json()
+        else:
+            return {inflection.underscore(k): v
+                    for k, v in response.json().items()}
 
     def get_user(self, id_or_username):
         return self._request_json("get", _GET_USER_URL.format(id_or_username))
