@@ -55,9 +55,12 @@ class Tui:
                 pass
             else:
                 if in_char == curses.KEY_BACKSPACE:
-                    user_api = user_api[:-1]
-                    getch_position[1] -= 1
-                    input_scr.delch(*getch_position)
+                    if len(user_api) == 0:
+                        pass
+                    else:
+                        user_api = user_api[:-1]
+                        getch_position[1] -= 1
+                        input_scr.delch(*getch_position)
                 else:
                     user_api += chr(in_char)
                     getch_position[1] += 1
