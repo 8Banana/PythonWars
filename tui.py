@@ -10,11 +10,14 @@ from pythonwars.pythonwars import CodeWars
 
 
 class Tui:
+    '''TUI constructors and interaction class'''
     def __init__(self):
         self.code_wars = None
         self.scr_size = None
 
     def main(self, curse_main):
+        '''inits curses, sets some params, and begins
+        calling functions to get the show on the road.'''
         self.scr_size = ((curse_main.getmaxyx()[0] // 2), 
                         (curse_main.getmaxyx()[1] // 2))
         curses.cbreak()
