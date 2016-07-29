@@ -7,11 +7,11 @@ setuptools.setup(
     description="A curses interface for CodeWars",
     url="https://github.com/8Banana/PythonWars",
     author="8Banana",
-    install_requires=["requests",
-                      "inflection",
-                      "Pygments",
-                      "mistune",
-                      "tabulate",
-                      "colorama"],
+    install_requires=["requests>=2.10.0",
+                      "inflection>=0.3.1",
+                      "Pygments>=2.1.3",
+                      "mistune>=0.7.3",
+                      "tabulate>=0.7.5",
+                      "colorama>=0.3.7"],
     packages=["pythonwars"]
 )
