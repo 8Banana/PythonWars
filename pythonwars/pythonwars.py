@@ -13,12 +13,7 @@ _FINALIZE_SOLUTION_URL = (_API_URL + "code-challenges/projects/{}/"
 
 
 class CodeWars:
-    """The class that handles the CodeWars API.
-    Some methods can be used without passing an api_key to __init__, such as
-    `get_user`.
-    Whenever a method would return a camelCase key, this class turns it into
-    a snake_case key.
-    """
+    """The class that handles the CodeWars API."""
 
     def __init__(self, api_key=None):
         self.api_key = api_key
