@@ -29,7 +29,7 @@ class CodeWars:
     def _request_json(self, method, url, **kwargs):
         response = self.session.request(method, url, **kwargs)
         response.raise_for_status()
-        return response.json().items()
+        return response.json()
 
     def get_user(self, id_or_username):
         return self._request_json("get", _GET_USER_URL.format(id_or_username))
