@@ -42,7 +42,8 @@ class CodeWars:
             _GET_CODE_CHALLENGE_URL.format(id_or_slug),
         )
 
-    def train_next_code_challenge(self, language, strategy="default", peek=False):
+    def train_next_code_challenge(self, language,
+                                  strategy="default", peek=False):
         return self._request_json(
             "post",
             _TRAIN_NEXT_CODE_CHALLENGE_URL.format(language),
