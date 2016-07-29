@@ -55,7 +55,7 @@ class Tui:
                 pass
             else:
                 if in_char == curses.KEY_BACKSPACE:
-                    if len(user_api) == 0:
+                    if not user_api:
                         pass
                     else:
                         user_api = user_api[:-1]
