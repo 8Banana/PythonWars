@@ -1,6 +1,9 @@
 """
 A module for dealing with the CodeWars API via the CodeWars class.
 """
+
+import time
+
 import inflection
 import requests
 
@@ -14,6 +17,11 @@ _ATTEMPT_SOLUTION_URL = (_API_URL + "code-challenges/projects/:project_id/"
                          "solutions/:solution_id/attempt")
 _FINALIZE_SOLUTION_URL = (_API_URL + "code-challenges/projects/{}/"
                           "solutions/{}/finalize")
+_GET_DEFERRED_RESPONSE_URL = _API_URL + "deferred/{}"
+
+
+class APIError(Exception):
+    """This is raised when an error related to the API is detected."""
 
 
 class CodeWars:
@@ -26,7 +34,7 @@ class CodeWars:
     a snake_case key.
     """
 
-    def __init__(self, api_key=None, *, use_camel_case=False):
+    def __init__(self, api_key=None, user_agent=None, use_camel_case=False):
         """
         Initalize a CodeWars instance.
 
@@ -37,8 +45,13 @@ class CodeWars:
         self.api_key = api_key
         self.session = requests.Session()
         self.use_camel_case = use_camel_case
+        if user_agent is not None:
+            self.session.headers["User-Agent"] = user_agent
+        else:
+            self.session.headers["User-Agent"] = "8banana tui"
         if api_key is not None:
             self.session.headers["Authorization"] = api_key
+        self._previous_deferred_response = 0
 
     def _request_json(self, method, url, **kwargs):
         response = self.session.request(method, url, **kwargs)
@@ -124,4 +137,14 @@ class CodeWars:
         return self._request_json(
             "post",
             _FINALIZE_SOLUTION_URL.format(project_id, solution_id),
+        )
+
+    def deferred_response(self, dmid):
+        """Poll for a deferred response."""
+        if time.time() - self._previous_deferred_response < 0.5:
+            raise APIError("polling should not be performed more than "
+                           "twice a second")
+        self._previous_deferred_response = time.time()
+        return self._request_json(
+            'get', _GET_DEFERRED_RESPONSE_URL.format(dmid),
         )
