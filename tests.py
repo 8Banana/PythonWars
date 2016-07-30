@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 import unittest
-import unittest.mock
+try:
+    from unittest import mock
+except ImportError:
+    # For all versions of python les sthan 3.3
+    import mock
 
 # Because we also need the `pythonwars.pythonwars` constants.
 from pythonwars import pythonwars
@@ -10,7 +14,7 @@ class TestCodeWars(unittest.TestCase):
     def setUp(self):
         self.codewars = pythonwars.CodeWars()
 
-    @unittest.mock.patch("pythonwars.CodeWars._request_json")
+    @mock.patch("pythonwars.CodeWars._request_json")
     def test_http_method(self, request_json):
         # This test validates that the arguments and calls for the
         # _request_json method don't change, because 90% of the time if you

@@ -1,6 +1,7 @@
 """
 A module for dealing with the CodeWars API via the CodeWars class.
 """
+from __future__ import print_function
 
 import time
 
