@@ -25,10 +25,10 @@ class CodeWars:
     Whenever a method would return a camelCase key, this class turns it into
     a snake_case key.
     """
-    def __init__(self, api_key=None, 
-                user_agent='8Banana TUI',
-                *, 
-                use_camel_case=False):
+    def __init__(self, api_key=None,
+                 user_agent='8Banana TUI',
+                 *, 
+                 use_camel_case=False):
 
         self.use_camel_case = use_camel_case
         self.session = requests.Session()
