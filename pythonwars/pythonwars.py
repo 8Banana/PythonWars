@@ -26,7 +26,7 @@ class CodeWars:
     a snake_case key.
     """
     def __init__(self, api_key=None, 
-                user_agent='8Banana TUI' 
+                user_agent='8Banana TUI',
                 *, 
                 use_camel_case=False):
 
