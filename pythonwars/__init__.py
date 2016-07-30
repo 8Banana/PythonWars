@@ -5,4 +5,5 @@ calls.
 More information about the API:
     http://dev.codewars.com/
 """
+# flake8: noqa
 from .pythonwars import CodeWars

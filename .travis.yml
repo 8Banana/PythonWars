@@ -1,11 +1,15 @@
 language: python
 python:
+    - "2.7"
+    - "3.2"
+    - "3.3"
+    - "3.4"
     - "3.5"
+    - "nightly"
 install:
     - "pip install ."
-    - "pip install pylint"
+    - "pip install flake8 flake8-docstrings"
     - "pip install -r requirements.txt"
 script:
-    - "python3 tests.py"
-    # We don't want our build to fail just cause pylint is fussy.
-    - "pylint pythonwars/"
+    - "python tests.py"
+    - "python -m flake8 pythonwars/"
