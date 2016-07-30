@@ -21,9 +21,9 @@ class CodeWars:
     a snake_case key.
     """
 
-    def __init__(self, api_key=None):
-        self.api_key = api_key
+    def __init__(self, api_key=None, user_agent='8Banana'):
         self.session = requests.Session()
+        self.session.headers['User-agent'] = user_agent
         if api_key is not None:
             self.session.headers["Authorization"] = api_key
 
