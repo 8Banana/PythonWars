@@ -27,7 +27,7 @@ class CodeWars:
     """
     def __init__(self, api_key=None,
                  user_agent='8Banana TUI',
-                 *, 
+                 *,
                  use_camel_case=False):
 
         self.use_camel_case = use_camel_case
