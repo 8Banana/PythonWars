@@ -13,5 +13,5 @@ install:
     - "pip install flake8 flake8-docstrings"
     - "pip install -r requirements.txt"
 script:
-    - "python3 tests.py"
-    - "python3 -m flake8 pythonwars/"
+    - "python tests.py"
+    - "python -m flake8 pythonwars/"
