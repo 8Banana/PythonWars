@@ -18,23 +18,22 @@ class Tui:
     def main(self, curse_main):
         '''inits curses, sets some params, and begins
         calling functions to get the show on the road.'''
-        self.scr_size = ((curse_main.getmaxyx()[0] // 2), 
-                        (curse_main.getmaxyx()[1] // 2))
+        self.scr_size = ((curse_main.getmaxyx()[0] // 2),
+                         (curse_main.getmaxyx()[1] // 2))
         curses.cbreak()
         self.login_screen(curse_main)
         self.auth_api(curse_main)
 
     def login_screen(self, login_scr):
-
-        login_scr.addstr('-'*int(self.scr_size[1] - 11) + 
-                        'Welcome to CodeWars!' + 
-                        '-'*int(self.scr_size[1] - 10))
+        login_scr.addstr('-'*int(self.scr_size[1] - 11) +
+                         'Welcome to CodeWars!' +
+                         '-'*int(self.scr_size[1] - 10))
         login_scr.refresh()
         time.sleep(1)
 
-        login_scr.addstr(int(self.scr_size[0] + 5), 
-                        int(self.scr_size[1] - 14), 
-                        'Please enter your API token:')
+        login_scr.addstr(int(self.scr_size[0] + 5),
+                         int(self.scr_size[1] - 14),
+                         'Please enter your API token:')
         login_scr.refresh()
         curses.echo()
         time.sleep(1)
@@ -43,8 +42,8 @@ class Tui:
             logo_thrd.start()
         user_api = ''
         getch_position = [0, 0]
-        input_scr = curses.newwin(1,21, int(self.scr_size[0] + 6), 
-                                        int(self.scr_size[1] - 10))
+        input_scr = curses.newwin(1,21, int(self.scr_size[0] + 6),
+                                 int(self.scr_size[1] - 10))
         input_scr.keypad(True)
         input_scr.nodelay(True)
 
@@ -71,20 +70,20 @@ class Tui:
         input_scr.nodelay(False)
         login_scr.keypad(False)
 
-        login_scr.addstr(int(self.scr_size[0] + 8), 
-                        int(self.scr_size[1] -12), 
-                        'Press enter to confirm.')
+        login_scr.addstr(int(self.scr_size[0] + 8),
+                         int(self.scr_size[1] - 12),
+                         'Press enter to confirm.')
         login_scr.getch()
-        login_scr.addstr(int(self.scr_size[0] + 10), 
-                        int(self.scr_size[1] -9), 
-                        'Creating session.')
+        login_scr.addstr(int(self.scr_size[0] + 10),
+                         int(self.scr_size[1] - 9),
+                         'Creating session.')
         login_scr.refresh()
 
         self.code_wars = CodeWars(user_api)
 
-        login_scr.addstr(int(self.scr_size[0] + 11), 
-                        int(self.scr_size[1] -8), 
-                        'Session active.')
+        login_scr.addstr(int(self.scr_size[0] + 11),
+                         int(self.scr_size[1] - 8),
+                         'Session active.')
         login_scr.refresh()
         login_scr.clear()
 
@@ -99,26 +98,25 @@ class Tui:
 
     def auth_api(self, auth_scr):
         auth_scr.addstr(int(self.scr_size[0] - 8),
-                        int(self.scr_size[1] -15),
-                        'Authenticating your API token.')
+                         int(self.scr_size[1] - 15),
+                         'Authenticating your API token.')
         try:
             a = self.code_wars.train_next_code_challenge('python', peek=True)
         except HTTPError:
-            auth_scr.addstr(int(self.scr_size[0] - 7), 
-                            int(self.scr_size[1] -14),
-                            'Authentication failed. Gtfo.')
-            auth_scr.addstr(int(self.scr_size[0] - 4), 
-                            int(self.scr_size[1] -13),
-                            'Press the Any key to exit.')
+            auth_scr.addstr(int(self.scr_size[0] - 7),
+                             int(self.scr_size[1] - 14),
+                             'Authentication failed. Gtfo.')
+            auth_scr.addstr(int(self.scr_size[0] - 4),
+                             int(self.scr_size[1] - 13),
+                             'Press the Any key to exit.')
             auth_scr.refresh()
             auth_scr.getkey()
         else:
-            auth_scr.addstr(int(self.scr_size[0] - 7), 
-                            int(self.scr_size[1] -7),
-                            'Authenticated.')
+            auth_scr.addstr(int(self.scr_size[0] - 7),
+                             int(self.scr_size[1] - 7),
+                             'Authenticated.')
             auth_scr.refresh()
             time.sleep(3)
-
 
 tui = Tui()
 curses.wrapper(tui.main)
