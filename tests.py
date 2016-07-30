@@ -23,6 +23,9 @@ class TestCodeWars(unittest.TestCase):
         request_json.assert_called_with("get",
                                         pythonwars._GET_USER_URL.format("8Banana"))
 
+    def test_https(self):
+        self.assertFalse(pythonwars._API_URL.startswith("https"))
+
 
 if __name__ == "__main__":
     unittest.main()
