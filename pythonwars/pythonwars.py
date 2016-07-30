@@ -18,6 +18,7 @@ _ATTEMPT_SOLUTION_URL = (_API_URL + "code-challenges/projects/:project_id/"
                          "solutions/:solution_id/attempt")
 _FINALIZE_SOLUTION_URL = (_API_URL + "code-challenges/projects/{}/"
                           "solutions/{}/finalize")
+_GET_DEFERRED_RESPONSE_URL = _API_URL + "deferred/{}"
 
 
 class APIError(Exception):
