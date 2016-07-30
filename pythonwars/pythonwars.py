@@ -1,6 +1,5 @@
 """
-This module just contains the CodeWars class, which is better explained in its
-docstring.
+A module for dealing with the CodeWars API via the CodeWars class.
 """
 import inflection
 import requests
@@ -20,6 +19,7 @@ _FINALIZE_SOLUTION_URL = (_API_URL + "code-challenges/projects/{}/"
 class CodeWars:
     """
     The class that handles the CodeWars API.
+
     Some methods can be used without passing an api_key to __init__, such as
     `get_user`.
     Whenever a method would return a camelCase key, this class turns it into
@@ -27,6 +27,13 @@ class CodeWars:
     """
 
     def __init__(self, api_key=None, *, use_camel_case=False):
+        """
+        Initalize a CodeWars instance.
+
+        Arguments:
+            api_key(str or None): Your API key.
+            use_camel_case(bool): If to use camelCase keys or snake_case.
+        """
         self.api_key = api_key
         self.session = requests.Session()
         self.use_camel_case = use_camel_case
@@ -44,7 +51,8 @@ class CodeWars:
 
     def get_user(self, id_or_username):
         """
-        Gets information about an user.
+        Get information about an user.
+
         More information:
             http://dev.codewars.com/#get-user
         """
@@ -52,7 +60,8 @@ class CodeWars:
 
     def get_code_challenge(self, id_or_slug):
         """
-        Gets infromation about a code challenge.
+        Get information about a code challenge.
+
         More information:
             http://dev.codewars.com/#get-code-challenge
         """
@@ -64,7 +73,8 @@ class CodeWars:
     def train_next_code_challenge(self, language,
                                   strategy="default", peek=False):
         """
-        Starts a new, random, code challenge.
+        Start a new, random, code challenge.
+
         WARNING: If peek is False, this method starts a hidden timer to track
         average completion time.
         More information:
@@ -78,7 +88,8 @@ class CodeWars:
 
     def train_code_challenge(self, id_or_slug, language):
         """
-        Starts a specific code challenge.
+        Start a specific code challenge.
+
         WARNING: If peek is False, this method starts a hidden timer to track
         average completion time.
         More information:
@@ -92,7 +103,8 @@ class CodeWars:
     def attempt_solution(self, project_id, solution_id, code,
                          output_format="html"):
         """
-        Submits a potential solution to a code challenge.
+        Submit a potential solution to a code challenge.
+
         More information:
             http://dev.codewars.com/#post-attempt-solution
         """
@@ -104,7 +116,8 @@ class CodeWars:
 
     def finalize_solution(self, project_id, solution_id):
         """
-        Finalizes a code challenge sent before by CodeWars.attempt_solution
+        Finalize a code challenge previously sent by CodeWars.attempt_solution.
+
         More information:
             http://dev.codewars.com/#post-finalize-solution
         """
