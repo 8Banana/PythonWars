@@ -43,7 +43,6 @@ class CodeWars:
             api_key(str or None): Your API key.
             use_camel_case(bool): If to use camelCase keys or snake_case.
         """
-        self.api_key = api_key
         self.session = requests.Session()
         self.use_camel_case = use_camel_case
         if user_agent is not None:

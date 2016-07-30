@@ -86,6 +86,7 @@ class Tui:
                          'Session active.')
         login_scr.refresh()
         login_scr.clear()
+        login_scr.refresh()
 
     def logo_print(self, scr):
         with open(path.join('ascii_art', 'logo.txt')) as logo_file:
@@ -100,6 +101,7 @@ class Tui:
         auth_scr.addstr(int(self.scr_size[0] - 8),
                          int(self.scr_size[1] - 15),
                          'Authenticating your API token.')
+        auth_scr.refresh()
         try:
             a = self.code_wars.train_next_code_challenge('python', peek=True)
         except HTTPError:
