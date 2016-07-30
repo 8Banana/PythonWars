@@ -3,7 +3,7 @@ import unittest
 try:
     from unittest import mock
 except ImportError:
-    # For all versions of python les sthan 3.3
+    # For all versions of python less than 3.3
     import mock
 
 # Because we also need the `pythonwars.pythonwars` constants.
