@@ -3,5 +3,9 @@ python:
     - "3.5"
 install:
     - "pip install ."
+    - "pip install pylint"
     - "pip install -r requirements.txt"
-script: python3 tests.py
+script:
+    - "python3 tests.py"
+    # We don't want our build to fail just cause pylint is fussy.
+    - "pylint pythonwars/"

@@ -1,5 +1,7 @@
 # PythonWars
 
+[![Build Status](https://travis-ci.org/8Banana/PythonWars.svg?branch=master)](https://travis-ci.org/8Banana/PythonWars)
+
 A Python API wrapper for the CodeWars API.
 
 ## Codewars API Reference
