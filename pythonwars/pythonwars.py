@@ -9,7 +9,7 @@ import inflection
 import requests
 
 
-_API_URL = "http://codewars.com/api/v1/"
+_API_URL = "https://www.codewars.com/api/v1/"
 _GET_USER_URL = _API_URL + "users/{}"
 _GET_CODE_CHALLENGE_URL = _API_URL + "code-challenges/{}"
 _TRAIN_NEXT_CODE_CHALLENGE_URL = _API_URL + "code-challenges/{}/train"
