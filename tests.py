@@ -25,7 +25,7 @@ class TestCodeWars(unittest.TestCase):
 
     def test_https(self):
         # For some reason, you can't use https if you don't include the www.
-        self.asserTrue(pythonwars._API_URL.startswith("https://www."))
+        self.assertTrue(pythonwars._API_URL.startswith("https://www."))
 
 
 if __name__ == "__main__":
