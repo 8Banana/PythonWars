@@ -24,7 +24,8 @@ class TestCodeWars(unittest.TestCase):
                                         pythonwars._GET_USER_URL.format("8Banana"))
 
     def test_https(self):
-        self.assertFalse(pythonwars._API_URL.startswith("https"))
+        # For some reason, you can't use https if you don't include the www.
+        self.asserTrue(pythonwars._API_URL.startswith("https://www."))
 
 
 if __name__ == "__main__":
